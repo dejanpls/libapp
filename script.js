@@ -1,37 +1,44 @@
 const addBtn = document.querySelector("#add");
 
+const popup = document.querySelector("#bookDialog");
 const cancelBtn = document.querySelector("#cancelBtn");
 const confirmBtn = document.querySelector("#confirmBtn");
-const popup = document.querySelector("dialog");
+const deletePopup = document.querySelector("#confirmDelete");
+const cancelDeleteBtn = document.querySelector("#cancelDeleteBtn");
+const confirmDeleteBtn = document.querySelector("#confirmDeleteBtn");
 
 let bookTitle = document.querySelector("#bookTitle");
 let bookAuthor = document.querySelector("#bookAuthor");
 let bookPages = document.querySelector("#bookPages");
 let bookRead = document.querySelector("#bookRead");
 
-const list = document.querySelector("#books");
+const card = document.querySelector("#books");
 
 const library = [];
 
 let id = 1;
 let currentEditBook = null;
+let deleteCurrentBook = false;
 
 function Book(title, author, pages, read) {
 	this.id = id; // incremented upon every book addition
-	
+
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
 }
 
-Book.prototype.info = function () {
-	let read = this.read ? "Read: Yes" : "Read: No";
-	return this.title + " by " + this.author + ". Pages: " + this.pages + ". " + read;
-};
+Book.prototype.isRead = function () {
+	return this.read ? "Read" : "Not Read";
+}
 
 Book.prototype.toggleRead = function () {
-    this.read = !this.read;
+	this.read = !this.read;
+};
+
+Book.prototype.info = function () {
+	return this.title + " by " + this.author;
 };
 
 addBook("1984", "George Orwell", 350, false);
@@ -48,45 +55,56 @@ function addBook(title, author, pages, read) {
 }
 
 function appendListItem(book) {
-	const listItem = document.createElement("li");
-	listItem.id = `book-${book.id}`;
-	const listText = document.createElement("span");
-	const listBtn = document.createElement("button");
-	const editBtn = document.createElement("button");
+	const cardItem = document.createElement("div");
+	cardItem.id = `book-${book.id}`;
 
-	listItem.appendChild(listText);
-	listText.textContent = book.info();
-	listText.classList = "info";
+	const infoText = document.createElement("p");
+	const pagesText = document.createElement("span");
+	const readBtn = document.createElement("button");
+
+	const btnContainer = document.createElement("div");
+	const deleteBtn = document.createElement("button");
+	const updateBtn = document.createElement("button");
+
+	cardItem.appendChild(infoText);
+	infoText.textContent = book.info();
+	infoText.classList = "info";
+
+	cardItem.appendChild(pagesText);
+	pagesText.textContent = "Pages: " + book.pages;
+	pagesText.classList = "info";
 	
-	listItem.appendChild(editBtn);
-	editBtn.textContent = "Edit";
-	editBtn.classList = "btn edit";
+	cardItem.appendChild(readBtn);
+	readBtn.textContent = book.isRead();
+	readBtn.classList = "btn read";
 
-	listItem.appendChild(listBtn);
-	listBtn.textContent = "Delete";
-	listBtn.classList = "btn delete";
+	btnContainer.appendChild(updateBtn);
+	updateBtn.textContent = "Edit";
+	updateBtn.classList = "btn edit";
 
-	list.appendChild(listItem);
+	btnContainer.appendChild(deleteBtn);
+	deleteBtn.textContent = "Delete";
+	deleteBtn.classList = "btn delete";
+
+	cardItem.appendChild(btnContainer);
+
+	card.appendChild(cardItem);
 	library.push(book);
 
-	listBtn.addEventListener("click", () => {
-		// Remove list item from the DOM
-		list.removeChild(listItem);
-	
-		// Remove the book from the library array
-		const index = library.findIndex((b) => b.id === book.id);
-		if (index > -1) {
-			library.splice(index, 1); // Remove the book from the array
-		}
-	
-		console.log(library); // Check the updated library
+	deleteBtn.addEventListener("click", () => {
+		deleteCurrentBook = book;
+		deletePopup.showModal();	
 	});
-	
 
-	editBtn.addEventListener('click', () => {
+	updateBtn.addEventListener('click', () => {
 		currentEditBook = book;
 		fillModal(book);
 		popup.showModal();
+	});
+
+	readBtn.addEventListener('click', () => {
+		book.toggleRead();
+		updateBookList(book);
 	});
 }
 
@@ -104,6 +122,12 @@ function fillModal(book) {
 	bookRead.checked = book.read;
 }
 
+function updateBookList(book) {
+	const listItem = document.querySelector(`#book-${book.id}`);
+	listItem.querySelector(".info").textContent = book.info(); // update span
+	listItem.querySelector(".read").textContent = book.isRead(); // update toggle button
+}
+
 // "Show the dialog" button opens the dialog modally
 addBtn.addEventListener("click", () => {
 	popup.showModal();
@@ -115,24 +139,43 @@ cancelBtn.addEventListener("click", () => {
 	popup.close();
 });
 
+cancelDeleteBtn.addEventListener('click', () => {
+	deletePopup.close();
+});
+
+confirmDeleteBtn.addEventListener('click', () => {
+	if (deleteCurrentBook) {
+		const cardItem = document.querySelector(`#book-${deleteCurrentBook.id}`);
+		card.removeChild(cardItem);
+
+		const index = library.findIndex((b) => b.id === deleteCurrentBook.id);
+		if (index > -1) {
+			library.splice(index, 1); // Remove the book from the array
+		}
+	}
+	deleteCurrentBook = null;
+	deletePopup.close();
+
+	console.log(library);
+});
+
 confirmBtn.addEventListener("click", () => {
-    if (currentEditBook) {
-        // Update existing book
-        currentEditBook.title = bookTitle.value;
-        currentEditBook.author = bookAuthor.value;
-        currentEditBook.pages = parseInt(bookPages.value);
-        currentEditBook.read = bookRead.checked;
+	if (currentEditBook) {
+		// Update existing book
+		currentEditBook.title = bookTitle.value;
+		currentEditBook.author = bookAuthor.value;
+		currentEditBook.pages = parseInt(bookPages.value);
+		currentEditBook.read = bookRead.checked;
 
-        // Update DOM
-        const listItem = document.querySelector(`#book-${currentEditBook.id}`);
-        listItem.querySelector(".info").textContent = currentEditBook.info();
+		// Update DOM
+		updateBookList(currentEditBook);
 
-        currentEditBook = null; // Clear the editing reference
-    } else {
-        // Add new book
-        addBook(bookTitle.value, bookAuthor.value, parseInt(bookPages.value), bookRead.checked);
-    }
-    popup.close();
+		currentEditBook = null; // Clear the editing reference
+	} else {
+		// Add new book
+		addBook(bookTitle.value, bookAuthor.value, parseInt(bookPages.value), bookRead.checked);
+	}
+	popup.close();
 
 	console.log(library);
 });
