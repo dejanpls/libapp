@@ -137,10 +137,12 @@ addBtn.addEventListener("click", () => {
 // "Close" button closes the dialog
 cancelBtn.addEventListener("click", () => {
 	popup.close();
+	currentEditBook = null;
 });
 
 cancelDeleteBtn.addEventListener('click', () => {
 	deletePopup.close();
+	deleteCurrentBook = null;
 });
 
 confirmDeleteBtn.addEventListener('click', () => {
@@ -153,7 +155,7 @@ confirmDeleteBtn.addEventListener('click', () => {
 			library.splice(index, 1); // Remove the book from the array
 		}
 	}
-	deleteCurrentBook = null;
+	deleteCurrentBook = null; // Clear the delete reference
 	deletePopup.close();
 
 	console.log(library);
@@ -177,5 +179,6 @@ confirmBtn.addEventListener("click", () => {
 	}
 	popup.close();
 
+	console.log(currentEditBook);
 	console.log(library);
 });
