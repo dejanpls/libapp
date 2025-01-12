@@ -30,16 +30,24 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.isRead = function () {
-	return this.read ? "Read" : "Not Read";
+	return this.read ? '<span class="material-icons">done_all</span>' : '<span class="material-icons">remove_done</span>';
 }
 
 Book.prototype.toggleRead = function () {
 	this.read = !this.read;
 };
 
-Book.prototype.info = function () {
-	return this.title + " by " + this.author;
+Book.prototype.getTitle = function () {
+	return this.title;
 };
+
+Book.prototype.getAuthor = function () {
+	return `By ${this.author}`;
+};
+
+Book.prototype.getPages = function () {
+	return `${this.pages} pages`;
+}
 
 addBook("1984", "George Orwell", 350, false);
 addBook("Animal Farm", "George Orwell", 90, true);
@@ -57,32 +65,47 @@ function addBook(title, author, pages, read) {
 function appendListItem(book) {
 	const cardItem = document.createElement("div");
 	cardItem.id = `book-${book.id}`;
+	cardItem.classList = "card";
 
-	const infoText = document.createElement("p");
-	const pagesText = document.createElement("span");
-	const readBtn = document.createElement("button");
-
+	const titleText = document.createElement("h2");
+	const authorText = document.createElement("h3");
+	const pagesText = document.createElement("p");
+	
 	const btnContainer = document.createElement("div");
+	btnContainer.classList = "btn-container";
 	const deleteBtn = document.createElement("button");
 	const updateBtn = document.createElement("button");
 
-	cardItem.appendChild(infoText);
-	infoText.textContent = book.info();
-	infoText.classList = "info";
+	const readContainer = document.createElement("div");
+	readContainer.classList = "read-container";
+	const readText = document.createElement("p");
+	readText.textContent = "Read: ";
+	const readBtn = document.createElement("button");
+	readBtn.classList = "btn button";
+
+	cardItem.appendChild(titleText);
+	titleText.textContent = book.getTitle();
+	titleText.classList = "info title";
+	
+	cardItem.appendChild(authorText);
+	authorText.textContent = book.getAuthor();
+	authorText.classList = "info author";
 
 	cardItem.appendChild(pagesText);
-	pagesText.textContent = "Pages: " + book.pages;
-	pagesText.classList = "info";
+	pagesText.textContent = book.getPages();
+	pagesText.classList = "info pages";
 	
-	cardItem.appendChild(readBtn);
-	readBtn.textContent = book.isRead();
-	readBtn.classList = "btn read";
-
-	btnContainer.appendChild(updateBtn);
-	updateBtn.textContent = "Edit";
+	cardItem.appendChild(updateBtn);
+	// updateBtn.textContent = "Edit";
+	updateBtn.innerHTML = '<span class="material-icons">more_vert</span>';
 	updateBtn.classList = "btn edit";
 
+	btnContainer.appendChild(readBtn);
+	readBtn.innerHTML = book.isRead();
+	readBtn.classList = "btn read";
+
 	btnContainer.appendChild(deleteBtn);
+	// deleteBtn.textContent = "Delete";
 	deleteBtn.textContent = "Delete";
 	deleteBtn.classList = "btn delete";
 
@@ -124,8 +147,11 @@ function fillModal(book) {
 
 function updateBookList(book) {
 	const listItem = document.querySelector(`#book-${book.id}`);
-	listItem.querySelector(".info").textContent = book.info(); // update span
-	listItem.querySelector(".read").textContent = book.isRead(); // update toggle button
+	listItem.querySelector(".title").textContent = book.getTitle();
+	listItem.querySelector(".author").textContent = book.getAuthor();
+	listItem.querySelector(".pages").textContent = book.getPages();
+
+	listItem.querySelector(".read").innerHTML = book.isRead(); // update toggle button
 }
 
 // "Show the dialog" button opens the dialog modally
@@ -179,6 +205,5 @@ confirmBtn.addEventListener("click", () => {
 	}
 	popup.close();
 
-	console.log(currentEditBook);
 	console.log(library);
 });

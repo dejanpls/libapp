@@ -5,10 +5,17 @@
     <!-- Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    
     <!-- Scripts -->
     <script src="script.js" defer></script>
 
@@ -16,11 +23,25 @@
 </head>
 
 <body>
-    <h1 id="title">LibApp</h1>
-    <button id="add">New Book</button>
+    <div class="menu-container">
+        <div class="menu">
+            <span id="theme" class="material-icons">
+                dark_mode
+            </span>
+            <a href="#" id="logo">LibApp</a>
+            <span id="search" class="material-icons">
+                search
+            </span>
+        </div>
+    </div>
+    <button id="add" class="btn circle">
+        <span class="material-icons">add</span>
+    </button>
+    
 
-    <!-- <ul id="books"></ul> -->
-     <div id="books"></div>
+    <div class="books-container">
+        <div id="books"></div>
+    </div>
 
     <dialog id="bookDialog">
         <form method="dialog">
@@ -49,7 +70,7 @@
             <button id="cancelDeleteBtn" type="button">Close</button>
         </form>
     </dialog>
-    
+
     <div class="footer">
         <p class="text">Made with lots of effort by <a href="https://www.github.com/dejanpls">@dejanpls</a></p>
     </div>
