@@ -71,7 +71,7 @@ function appendListItem(book) {
 	const titleText = document.createElement("h2");
 	const authorText = document.createElement("h3");
 	const pagesText = document.createElement("p");
-	
+
 	const updateBtn = document.createElement("button");
 
 	const btnContainer = document.createElement("div");
@@ -84,7 +84,7 @@ function appendListItem(book) {
 	cardItem.appendChild(titleText);
 	titleText.textContent = book.getTitle();
 	titleText.classList = "info title";
-	
+
 	cardItem.appendChild(authorText);
 	authorText.textContent = book.getAuthor();
 	authorText.classList = "info author";
@@ -92,7 +92,7 @@ function appendListItem(book) {
 	cardItem.appendChild(pagesText);
 	pagesText.textContent = book.getPages();
 	pagesText.classList = "info pages";
-	
+
 	cardItem.appendChild(updateBtn);
 	// updateBtn.textContent = "Edit";
 	updateBtn.innerHTML = '<span class="material-icons">more_vert</span>';
@@ -114,7 +114,7 @@ function appendListItem(book) {
 
 	deleteBtn.addEventListener("click", () => {
 		deleteCurrentBook = book;
-		deletePopup.showModal();	
+		deletePopup.showModal();
 	});
 
 	updateBtn.addEventListener('click', () => {
@@ -194,22 +194,28 @@ confirmDeleteBtn.addEventListener('click', () => {
 });
 
 confirmBtn.addEventListener("click", () => {
-	if (currentEditBook) {
-		// Update existing book
-		currentEditBook.title = bookTitle.value;
-		currentEditBook.author = bookAuthor.value;
-		currentEditBook.pages = parseInt(bookPages.value);
-		currentEditBook.read = bookRead.checked;
+	const form = document.querySelector('form');
 
-		// Update DOM
-		updateBookList(currentEditBook);
+	if (form.checkValidity()) {
+		if (currentEditBook) {
+			// Update existing book
+			currentEditBook.title = bookTitle.value;
+			currentEditBook.author = bookAuthor.value;
+			currentEditBook.pages = parseInt(bookPages.value);
+			currentEditBook.read = bookRead.checked;
 
-		currentEditBook = null; // Clear the editing reference
+			// Update DOM
+			updateBookList(currentEditBook);
+
+			currentEditBook = null; // Clear the editing reference
+		} else {
+			// Add new book
+			addBook(bookTitle.value, bookAuthor.value, parseInt(bookPages.value), bookRead.checked);
+		}
+		popup.close();
+		console.log(library);
 	} else {
-		// Add new book
-		addBook(bookTitle.value, bookAuthor.value, parseInt(bookPages.value), bookRead.checked);
+		form.reportValidity();
 	}
-	popup.close();
 
-	console.log(library);
 });

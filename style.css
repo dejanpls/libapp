@@ -259,3 +259,10 @@ dialog input[type="number"] {
     color: #014f86;
     gap: .1rem;
 }
+
+
+p#titleCharCount {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
