@@ -7,6 +7,8 @@ const deletePopup = document.querySelector("#confirmDelete");
 const cancelDeleteBtn = document.querySelector("#cancelDeleteBtn");
 const confirmDeleteBtn = document.querySelector("#confirmDeleteBtn");
 
+const libraryEmptySection = document.querySelector("#emptyLibrarySection");
+
 cancelBtn.classList = "btn";
 confirmBtn.classList = "btn confirm";
 cancelDeleteBtn.classList = "btn";
@@ -53,12 +55,6 @@ Book.prototype.getAuthor = function () {
 Book.prototype.getPages = function () {
 	return `${this.pages} pages`;
 }
-
-addBook("1984", "George Orwell", 350, false);
-addBook("Animal Farm", "George Orwell", 90, true);
-addBook("The Godfather", "Mario Puzo", 400, false);
-addBook("Gone with the Wind", "Margaret Mitchell", 900, true);
-console.log(library);
 
 function addBook(title, author, pages, read) {
 	const book = new Book(title, author, pages, read);
@@ -131,6 +127,10 @@ function appendListItem(book) {
 		book.toggleRead();
 		updateBookList(book);
 	});
+
+	if (library.length === 1) {
+		libraryEmptySection.classList = "hidden";
+	}
 }
 
 function clearModal() {
@@ -185,6 +185,10 @@ confirmDeleteBtn.addEventListener('click', () => {
 	}
 	deleteCurrentBook = null; // Clear the delete reference
 	deletePopup.close();
+
+	if (library.length === 0) {
+		libraryEmptySection.classList = "display";
+	}
 
 	console.log(library);
 });

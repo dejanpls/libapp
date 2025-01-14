@@ -38,6 +38,7 @@ div.menu a#logo {
 button.btn {
     cursor: pointer;
     font-family: "Roboto Mono", serif;
+    font-size: 1rem;
     background-color: #fff;
     border: none;
     color: #284b63;
@@ -239,4 +240,22 @@ dialog input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1rem;
+    color: #014f86;
+    gap: .1rem;
 }
