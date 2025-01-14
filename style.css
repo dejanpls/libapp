@@ -40,6 +40,21 @@ button.btn {
     font-family: "Roboto Mono", serif;
     background-color: #fff;
     border: none;
+    color: #284b63;
+    transition: color .3s ease;
+    /* Smooth hover effect */
+}
+
+button.delete:hover {
+    color: #6a040f;
+}
+
+button.read {
+    color: #014f86;
+}
+
+button.not-read {
+    color: #6a040f;
 }
 
 button#add {
@@ -53,10 +68,19 @@ button#add {
     /* Ensure the button stays on top of other elements */
 
     font-size: 0;
-    background-color: #5995DA;
-    display: flex; 
+    background-color: #014f86;
+    color: #fff;
+    display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add shadow effect */
+    transition: box-shadow 0.3s ease;
+    /* Smooth hover effect */
+}
+
+button#add:hover {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .circle {
@@ -64,13 +88,15 @@ button#add {
     height: 50px;
     border-radius: 50%;
     color: #fff;
-    display: flex; /* Ensures child elements are centered */
+    display: flex;
+    /* Ensures child elements are centered */
     align-items: center;
     justify-content: center;
 }
 
 .material-icons {
-    font-size: 24px; /* Adjust icon size */
+    font-size: 24px;
+    /* Adjust icon size */
 }
 
 
@@ -89,6 +115,7 @@ div#books {
 }
 
 div#books div.card {
+    color: #284b63;
     padding: 1rem;
     min-width: 280px;
     max-width: 280px;
@@ -96,10 +123,13 @@ div#books div.card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative; /* Reference point for the button */
+    position: relative;
+    /* Reference point for the button */
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow effect */
-    transition: box-shadow 0.3s ease; /* Smooth hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add shadow effect */
+    transition: box-shadow 0.3s ease;
+    /* Smooth hover effect */
 }
 
 div#books div.card:hover {
@@ -128,28 +158,85 @@ div.btn-container {
 }
 
 .edit {
-    position: absolute; /* Positioned relative to the .card */
-    top: 1rem; /* Distance from the bottom of the card */
-    right: .5rem; /* Distance from the right of the card */
-}
-
-div.read-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    position: absolute;
+    /* Positioned relative to the .card */
+    top: 1rem;
+    /* Distance from the bottom of the card */
+    right: .5rem;
+    /* Distance from the right of the card */
 }
 
 div.footer {
     margin-top: auto;
     text-align: center;
-    padding: 0.5rem;
-    background-color: #dbecf5;
-    color: #3d3d3d;
-    font-family: 'Courier New', Courier, monospace;
+    padding: 1rem;
+    background-color: #5995DA;
+    color: #fff;
+    font-family: "Merriweather", serif;
+    font-weight: 100;
     font-size: .8rem;
 }
 
 .link {
-    color: #3d3d3d;
+    color: #fff;
     text-decoration: none;
+}
+
+/* Dialog Styling */
+
+/* Style the dialog itself */
+dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    /* Soft shadow for depth */
+    background-color: #ffffff;
+    max-width: 400px;
+    width: 90%;
+    /* Responsive width */
+    font-family: "Merriweather", serif;
+    font-weight: 100;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+    /* Smooth appearance */
+
+    /* Centering */
+    /* position: fixed; */
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+dialog#bookDialog {
+    text-align: start;
+}
+
+/* Add an overlay effect for focus */
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    /* Dark transparent overlay */
+}
+
+/* Style the form inside the dialog */
+dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Add space between form elements */
+}
+
+.dialogBtnContainer{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Style input fields */
+dialog input[type="text"],
+dialog input[type="number"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
 }

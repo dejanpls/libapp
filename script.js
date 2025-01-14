@@ -7,6 +7,11 @@ const deletePopup = document.querySelector("#confirmDelete");
 const cancelDeleteBtn = document.querySelector("#cancelDeleteBtn");
 const confirmDeleteBtn = document.querySelector("#confirmDeleteBtn");
 
+cancelBtn.classList = "btn";
+confirmBtn.classList = "btn confirm";
+cancelDeleteBtn.classList = "btn";
+confirmDeleteBtn.classList = "btn confirm";
+
 let bookTitle = document.querySelector("#bookTitle");
 let bookAuthor = document.querySelector("#bookAuthor");
 let bookPages = document.querySelector("#bookPages");
@@ -71,15 +76,12 @@ function appendListItem(book) {
 	const authorText = document.createElement("h3");
 	const pagesText = document.createElement("p");
 	
-	const btnContainer = document.createElement("div");
-	btnContainer.classList = "btn-container";
-	const deleteBtn = document.createElement("button");
 	const updateBtn = document.createElement("button");
 
-	const readContainer = document.createElement("div");
-	readContainer.classList = "read-container";
-	const readText = document.createElement("p");
-	readText.textContent = "Read: ";
+	const btnContainer = document.createElement("div");
+	btnContainer.classList = "btn-container";
+
+	const deleteBtn = document.createElement("button");
 	const readBtn = document.createElement("button");
 	readBtn.classList = "btn button";
 

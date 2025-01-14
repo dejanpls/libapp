@@ -47,27 +47,32 @@
         <form method="dialog">
             <label for="bookTitle">Title:</label>
             <input type="text" id="bookTitle" name="bookTitle" required>
-            <br><br>
+         
             <label for="bookAuthor">Author:</label>
             <input type="text" id="bookAuthor" name="bookAuthor" required>
-            <br><br>
+ 
             <label for="bookPages">Number of Pages:</label>
             <input type="number" id="bookPages" name="bookPages" min="1" required>
-            <br><br>
-            <label for="bookRead">Have you read the book?</label>
-            <input type="checkbox" id="bookRead" name="bookRead">
-            <br><br>
-            <button id="confirmBtn" type="button">Confirm</button>
-            <button id="cancelBtn" type="button">Close</button>
+
+            <div class="bookReadContainer">
+                <label for="bookRead">Have you read the book?</label>
+                <input type="checkbox" id="bookRead" name="bookRead">
+            </div>
+            
+            <div class="dialogBtnContainer">
+                <button id="confirmBtn" type="button">Confirm</button>
+                <button id="cancelBtn" type="button">Close</button>
+            </div>
         </form>
     </dialog>
 
     <dialog id="confirmDelete">
-        <form method="confirmDeleteDialog">
+        <form method="dialog">
             <p>Are you sure you want to delete this item?</p>
-            <br><br>
-            <button id="confirmDeleteBtn" type="button">Confirm</button>
-            <button id="cancelDeleteBtn" type="button">Close</button>
+            <div class="dialogBtnContainer">
+                <button id="confirmDeleteBtn" type="button">Confirm</button>
+                <button id="cancelDeleteBtn" type="button">Close</button>
+            </div>
         </form>
     </dialog>
 
