@@ -277,10 +277,10 @@ div#searchLibrary {
     max-width: 400px;
     width: 80%;
     background-color: rgb(89 149 218);
-    padding: 16px 8px 8px 8px;
+    padding: 8px;
     border-radius: 8px;
 
-    top: 11%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
