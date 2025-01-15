@@ -1,5 +1,8 @@
 const addBtn = document.querySelector("#add");
 
+const themeMode = document.getElementById("theme");
+const search = document.getElementById("search");
+
 const popup = document.querySelector("#bookDialog");
 const cancelBtn = document.querySelector("#cancelBtn");
 const confirmBtn = document.querySelector("#confirmBtn");
@@ -20,6 +23,16 @@ let bookPages = document.querySelector("#bookPages");
 let bookRead = document.querySelector("#bookRead");
 
 const card = document.querySelector("#books");
+
+const wrapper = document.querySelector("div.wrapper");
+const menuContainer = document.querySelector("div.menu-container");
+const footerContainer = document.querySelector("div.footer");
+const emptyLibraryContainer = document.querySelector("#emptyLibrarySection");
+
+const WHITE = "rgb(255, 255, 255)";
+const DARKGREEN = "rgb(19, 41, 61)";
+const LIGHTBLUE	= "rgb(89, 149, 218)";
+const DARKBLUE = "rgb(1, 42, 74)";
 
 const library = [];
 
@@ -217,5 +230,12 @@ confirmBtn.addEventListener("click", () => {
 	} else {
 		form.reportValidity();
 	}
+});
 
+themeMode.addEventListener('click', () => {
+	wrapper.style.backgroundColor = getComputedStyle(wrapper).backgroundColor === WHITE ? DARKGREEN : WHITE;
+	menuContainer.style.backgroundColor = getComputedStyle(menuContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
+	footerContainer.style.backgroundColor = getComputedStyle(footerContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
+	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
+	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
 });

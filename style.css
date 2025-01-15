@@ -4,15 +4,16 @@
     box-sizing: border-box;
 }
 
-body {
+div.wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: rgb(255, 255, 255);
 }
 
 div.menu-container {
     color: #fff;
-    background-color: #5995DA;
+    background-color: rgb(89 149 218);
     /* Blue */
     padding: 20px 0;
     display: flex;
@@ -117,6 +118,7 @@ div#books {
 
 div#books div.card {
     color: #284b63;
+    background-color: #fff;
     padding: 1rem;
     min-width: 280px;
     max-width: 280px;
@@ -256,13 +258,11 @@ dialog input[type="number"] {
     font-weight: 300;
     font-style: normal;
     font-size: 1rem;
-    color: #014f86;
+    color: rgb(1, 79, 134);
     gap: .1rem;
 }
 
-
-p#titleCharCount {
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
+span#theme,
+span#search {
+    cursor: pointer;
 }
