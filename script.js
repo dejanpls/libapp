@@ -4,7 +4,6 @@ const themeMode = document.getElementById("theme");
 const search = document.getElementById("search");
 const searchPopup = document.getElementById("searchLibrary");
 const searchBtn = document.getElementById("searchBtn");
-const cancelSearch = document.getElementById("cancelSearch");
 const searchInput = document.getElementById("bookSearch");
 
 const popup = document.querySelector("#bookDialog");
@@ -250,7 +249,3 @@ search.addEventListener('click', () => {
 	search.textContent = search.textContent === 'close' ? 'search' : 'close';
 	searchInput.focus();
 });
-
-// cancelSearch.addEventListener('click', () => {
-// 	searchPopup.close();
-// });

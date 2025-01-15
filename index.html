@@ -51,14 +51,19 @@
             </div>
 
             <div style="visibility: hidden;" id="searchLibrary">
-                <form class="form" method="form">
-                    <input placeholder="1984 by George Orwell" type="text" id="bookSearch" name="bookTitle" required
+                <form class="form" method="GET">
+                    <input 
+                        placeholder="Enter book title" 
+                        type="text" 
+                        id="bookSearch" 
+                        name="bookTitle" 
                         maxlength="32">
-                    <span id="searchBtn" class="material-icons">
+                    <span id="searchBtn" type="submit" class="material-icons">
                         search
                     </span>
                 </form>
             </div>
+            
 
             <div class="books-container">
                 <div id="books"></div>
