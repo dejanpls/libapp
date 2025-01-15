@@ -280,7 +280,7 @@ div#searchLibrary {
     padding: 16px 8px 8px 8px;
     border-radius: 8px;
 
-    top: 11%;
+    top: 100px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
