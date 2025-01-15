@@ -2,6 +2,10 @@ const addBtn = document.querySelector("#add");
 
 const themeMode = document.getElementById("theme");
 const search = document.getElementById("search");
+const searchPopup = document.getElementById("searchLibrary");
+const searchBtn = document.getElementById("searchBtn");
+const cancelSearch = document.getElementById("cancelSearch");
+const searchInput = document.getElementById("bookSearch");
 
 const popup = document.querySelector("#bookDialog");
 const cancelBtn = document.querySelector("#cancelBtn");
@@ -238,4 +242,15 @@ themeMode.addEventListener('click', () => {
 	footerContainer.style.backgroundColor = getComputedStyle(footerContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
 	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
 	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
+	searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
 });
+
+search.addEventListener('click', () => {
+	searchPopup.style.visibility = searchPopup.style.visibility === "visible" ? "hidden" : "visible";
+	search.textContent = search.textContent === 'close' ? 'search' : 'close';
+	searchInput.focus();
+});
+
+// cancelSearch.addEventListener('click', () => {
+// 	searchPopup.close();
+// });

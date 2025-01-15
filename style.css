@@ -26,7 +26,6 @@ div.menu-container div.menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 div.menu a#logo {
@@ -236,14 +235,14 @@ dialog form {
 
 /* Style input fields */
 dialog input[type="text"],
-dialog input[type="number"] {
+dialog input[type="number"],
+form.form input[type="text"] {
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
 }
-
 .hidden {
     display: none;
 }
@@ -265,4 +264,34 @@ dialog input[type="number"] {
 span#theme,
 span#search {
     cursor: pointer;
+}
+
+
+div#searchLibrary {
+    position: fixed;
+    /* Fixes the button in place */
+    top: 5rem;
+    /* Distance from the right */
+    z-index: 1000;
+    /* Ensure the button stays on top of other elements */
+    max-width: 400px;
+    width: 80%;
+    background-color: rgb(89 149 218);
+    padding: 16px 8px 8px 8px;
+    border-radius: 8px;
+
+    top: 11%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form #searchBtn {
+    cursor: pointer;
+    color: #fff;
 }
