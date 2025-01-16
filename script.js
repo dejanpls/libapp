@@ -242,7 +242,7 @@ themeMode.addEventListener('click', () => {
 	footerContainer.style.backgroundColor = getComputedStyle(footerContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
 	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
 	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
-	searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
+	// searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
 });
 
 search.addEventListener('click', () => {
@@ -250,7 +250,3 @@ search.addEventListener('click', () => {
 	search.textContent = search.textContent === 'close' ? 'search' : 'close';
 	searchInput.focus();
 });
-
-// cancelSearch.addEventListener('click', () => {
-// 	searchPopup.close();
-// });
