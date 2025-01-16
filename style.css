@@ -236,7 +236,7 @@ dialog form {
 /* Style input fields */
 dialog input[type="text"],
 dialog input[type="number"],
-form.form input[type="text"] {
+div.form input[type="text"] {
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #ccc;
