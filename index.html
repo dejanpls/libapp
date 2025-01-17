@@ -50,12 +50,17 @@
                 <p>Start by adding some books.</p>
             </div>
 
+            <div style="display: none;" id="searchInfo" class="display">
+                <h2>Search Empty</h2>
+                <p>Your query matches no current book.</p>
+            </div>
+
             <div style="visibility: hidden;" id="searchLibrary">
                 <!-- Search bar -->
                 <div class="form">
                     <input placeholder="1984 by George Orwell" type="text" id="bookSearch" name="bookTitle" required
                         maxlength="32">
-                    <span id="searchBtn" type="submit" class="material-icons">
+                    <span id="searchBtn" type="button" class="material-icons">
                         search
                     </span>
                 </div>

@@ -279,8 +279,9 @@ div#searchLibrary {
     background-color: rgb(89 149 218);
     padding: 8px;
     border-radius: 8px;
+    border: 1px solid #fff;
 
-    top: 100px;
+    top: 2.5rem;
     left: 50%;
     transform: translate(-50%, -50%);
 }

@@ -6,6 +6,9 @@ const searchPopup = document.getElementById("searchLibrary");
 const searchBtn = document.getElementById("searchBtn");
 const searchInput = document.getElementById("bookSearch");
 
+const searchInfo = document.getElementById("searchInfo");
+let matches = 0; // search result matches
+
 const popup = document.querySelector("#bookDialog");
 const cancelBtn = document.querySelector("#cancelBtn");
 const confirmBtn = document.querySelector("#confirmBtn");
@@ -149,6 +152,24 @@ function appendListItem(book) {
 	}
 }
 
+// For debugging
+addBook("1984", "George Orwell", 350, false);
+addBook("To Kill a Mockingbird", "Harper Lee", 281, true);
+addBook("Pride and Prejudice", "Jane Austen", 279, false);
+addBook("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+addBook("Moby-Dick", "Herman Melville", 635, false);
+addBook("War and Peace", "Leo Tolstoy", 1225, false);
+addBook("The Catcher in the Rye", "J.D. Salinger", 214, true);
+addBook("The Hobbit", "J.R.R. Tolkien", 310, true);
+addBook("Fahrenheit 451", "Ray Bradbury", 249, true);
+addBook("Brave New World", "Aldous Huxley", 268, false);
+addBook("Crime and Punishment", "Fyodor Dostoevsky", 671, true);
+addBook("The Grapes of Wrath", "John Steinbeck", 464, false);
+addBook("Ulysses", "James Joyce", 730, false);
+addBook("The Brothers Karamazov", "Fyodor Dostoevsky", 824, true);
+addBook("Animal Farm", "George Orwell", 112, true);
+addBook("Jane Eyre", "Charlotte Brontë", 500, false);
+
 function clearModal() {
 	bookTitle.value = "";
 	bookAuthor.value = "";
@@ -241,11 +262,40 @@ themeMode.addEventListener('click', () => {
 	footerContainer.style.backgroundColor = getComputedStyle(footerContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
 	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
 	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
-	// searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
+	searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
 });
 
 search.addEventListener('click', () => {
 	searchPopup.style.visibility = searchPopup.style.visibility === "visible" ? "hidden" : "visible";
 	search.textContent = search.textContent === 'close' ? 'search' : 'close';
+	searchInfo.style.display = "none";
 	searchInput.focus();
+	
+	if (search.textContent === 'close') searchInput.value = '';
+
+	const items = card.querySelectorAll("div.card");
+	Array.from(items).forEach((item) => item.style.display = "flex"); // show all books again
+
+});
+
+searchBtn.addEventListener('click', () => {
+
+	const items = card.querySelectorAll("div.card");
+	const keywords = searchInput.value.split(/\s+/); // split by spaces
+
+	if (searchInput.value !== '' && library.length > 0) {		
+		
+		Array.from(items).forEach((item) => {
+			const itemName = item.firstChild.textContent;
+			
+			if (keywords.some(word => new RegExp(`\\b${word}\\b`, 'i').test(itemName))) {
+				item.style.display = "flex";
+				matches += 1;
+			} else {
+				item.style.display = "none";
+			}
+		});
+		matches < 1 ? searchInfo.style.display = "flex" : searchInfo.style.display = "none";
+		matches = 0;
+	}
 });
