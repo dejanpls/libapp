@@ -256,33 +256,31 @@ confirmBtn.addEventListener("click", () => {
 	}
 });
 
-themeMode.addEventListener('click', () => {
+function toggleTheme() {
 	wrapper.style.backgroundColor = getComputedStyle(wrapper).backgroundColor === WHITE ? DARKGREEN : WHITE;
 	menuContainer.style.backgroundColor = getComputedStyle(menuContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
 	footerContainer.style.backgroundColor = getComputedStyle(footerContainer).backgroundColor === DARKBLUE ? LIGHTBLUE : DARKBLUE;
 	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
 	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
 	searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
-});
+}
 
-search.addEventListener('click', () => {
+function toggleSearch() {
 	searchPopup.style.visibility = searchPopup.style.visibility === "visible" ? "hidden" : "visible";
 	search.textContent = search.textContent === 'close' ? 'search' : 'close';
 	searchInfo.style.display = "none";
 	searchInput.focus();
 	
 	if (search.textContent === 'close') searchInput.value = '';
-
+	
 	const items = card.querySelectorAll("div.card");
 	Array.from(items).forEach((item) => item.style.display = "flex"); // show all books again
+}
 
-});
-
-searchBtn.addEventListener('click', () => {
-
+function searchBook() {
 	const items = card.querySelectorAll("div.card");
 	const keywords = searchInput.value.split(/\s+/); // split by spaces
-
+	
 	if (searchInput.value !== '' && library.length > 0) {		
 		
 		Array.from(items).forEach((item) => {
@@ -298,4 +296,8 @@ searchBtn.addEventListener('click', () => {
 		matches < 1 ? searchInfo.style.display = "flex" : searchInfo.style.display = "none";
 		matches = 0;
 	}
-});
+}
+
+themeMode.addEventListener('click', () => toggleTheme());
+search.addEventListener('click', () => toggleSearch());
+searchBtn.addEventListener('click', () => searchBook());
