@@ -222,9 +222,20 @@ dialog::backdrop {
 
 /* Style the form inside the dialog */
 dialog form {
+    min-height: 120px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 16px; /* Add space between form elements */
+}
+
+dialog form .dialogBtnContainer {
+    margin-top: auto;
+}
+
+form.h4 {
+    font-family: "Merriweather", serif;
+    font-weight: 400;
 }
 
 .dialogBtnContainer{

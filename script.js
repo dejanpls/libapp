@@ -133,6 +133,8 @@ function appendListItem(book) {
 
 	deleteBtn.addEventListener("click", () => {
 		deleteCurrentBook = book;
+		const question = document.querySelector("form.deleteItemDialog p");
+		question.textContent = `\"${deleteCurrentBook.getTitle()}\"?`; 
 		deletePopup.showModal();
 	});
 
@@ -263,6 +265,7 @@ function toggleTheme() {
 	emptyLibraryContainer.style.color = getComputedStyle(emptyLibraryContainer).color === WHITE ? "rgb(1, 79, 134)" : WHITE;
 	themeMode.textContent = themeMode.textContent === 'dark_mode' ? 'light_mode' : 'dark_mode';
 	searchPopup.style.backgroundColor = getComputedStyle(searchPopup).backgroundColor === LIGHTBLUE ? DARKBLUE : LIGHTBLUE;
+
 }
 
 function toggleSearch() {
